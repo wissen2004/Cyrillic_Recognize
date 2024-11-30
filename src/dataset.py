@@ -2,6 +2,7 @@ from collections import Counter
 import augmentations
 from utils import *
 from config import LENGTH
+import random
 
 vignet = augmentations.Vignetting()
 cutout = augmentations.Cutout(min_size_ratio=[1, 4], max_size_ratio=[2, 5])
