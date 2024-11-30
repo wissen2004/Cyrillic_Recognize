@@ -45,7 +45,6 @@ test_loader = torch.utils.data.DataLoader(test_dataset, shuffle=True,
                                            batch_size=BATCH_SIZE, pin_memory=True,
                                            drop_last=True, collate_fn=TextCollate())
 
-# Only load model2 here
 import model2
 model = model2.TransformerModel2(len(ALPHABET), hidden=HIDDEN, enc_layers=ENC_LAYERS, dec_layers=DEC_LAYERS,
                                 nhead=N_HEADS, dropout=DROPOUT).to(DEVICE)

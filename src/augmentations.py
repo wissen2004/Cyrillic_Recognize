@@ -43,8 +43,8 @@ class LensDistortion(object):
                       [0, f, h / 2],
                       [0, 0, 1]])
 
-        d_coef = self.d_coef * np.random.random(5)  # value
-        d_coef = d_coef * (2 * (np.random.random(5) < 0.5) - 1)  # sign
+        d_coef = self.d_coef * np.random.random(5)
+        d_coef = d_coef * (2 * (np.random.random(5) < 0.5) - 1)
         M, _ = cv2.getOptimalNewCameraMatrix(K, d_coef, (w, h), 0)
 
         remap = cv2.initUndistortRectifyMap(K, d_coef, None, M, (w, h), 5)

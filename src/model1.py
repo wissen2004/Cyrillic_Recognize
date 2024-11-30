@@ -56,12 +56,12 @@ class TransformerModel(nn.Module):
         x = self.backbone.layer1(x)
         x = self.backbone.layer2(x)
         x = self.backbone.layer3(x)
-        x = self.backbone.layer4(x) # [64, 2048, 2, 8] : [B,C,H,W]
+        x = self.backbone.layer4(x)
             
-        x = self.backbone.fc(x) # [64, 256, 2, 8] : [B,C,H,W]
-        x = x.permute(0, 3, 1, 2) # [64, 8, 256, 2] : [B,W,C,H]
-        x = x.flatten(2) # [64, 8, 512] : [B,W,CH]
-        x = x.permute(1, 0, 2) # [8, 64, 512] : [W,B,CH]
+        x = self.backbone.fc(x)
+        x = x.permute(0, 3, 1, 2)
+        x = x.flatten(2)
+        x = x.permute(1, 0, 2)
         return x
 
     def predict(self, batch):
@@ -103,7 +103,7 @@ class TransformerModel(nn.Module):
         '''
         x = self._get_features(src)
         src_pad_mask = self.make_len_mask(x[:, :, 0])
-        src = self.pos_encoder(x) # [8, 64, 512]
+        src = self.pos_encoder(x)
 
         if self.trg_mask is None or self.trg_mask.size(0) != len(trg):
           self.trg_mask = self.generate_square_subsequent_mask(len(trg)).to(trg.device)
@@ -114,6 +114,6 @@ class TransformerModel(nn.Module):
         output = self.transformer(src, trg, src_mask=self.src_mask, tgt_mask=self.trg_mask,
                                   memory_mask=self.memory_mask,
                                   src_key_padding_mask=src_pad_mask, tgt_key_padding_mask=trg_pad_mask,
-                                  memory_key_padding_mask=src_pad_mask) # [13, 64, 512] : [L,B,CH]
-        logits = self.fc_out(output) # [13, 64, 92] : [L,B,H]
+                                  memory_key_padding_mask=src_pad_mask)
+        logits = self.fc_out(output)
         return logits
