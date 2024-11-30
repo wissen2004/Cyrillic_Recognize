@@ -9,3 +9,9 @@ train_log.tsv
 test_rn50_4h2l_result.tsv
 
 
+
+
+после того как установили requirements.txt
+отдельно доустановить
+
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
