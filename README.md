@@ -15,3 +15,8 @@ test_rn50_4h2l_result.tsv
 отдельно доустановить
 
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+
+для работы запустить train.py
+и только потом 
+app.py
