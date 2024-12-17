@@ -27,7 +27,7 @@ test_loader = torch.utils.data.DataLoader(test_dataset, shuffle=True,
 from src import model2
 
 if MODEL == 'model2':
-  model = model2.TransformerModel(len(ALPHABET), hidden=HIDDEN, enc_layers=ENC_LAYERS, dec_layers=DEC_LAYERS,
+  model = model2.TransformerModel2(len(ALPHABET), hidden=HIDDEN, enc_layers=ENC_LAYERS, dec_layers=DEC_LAYERS,
                                   nhead=N_HEADS, dropout=0.0).to(DEVICE)
 
 if WEIGHTS_PATH != None:
